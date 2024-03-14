@@ -1,6 +1,5 @@
-import tkinter
+from tkinter import Tk, Frame, Label, Entry, Checkbutton, Button, messagebox
 import os
-from tkinter import messagebox
 
 def create_account():
     username = username_entry.get()
@@ -16,32 +15,35 @@ def create_account():
 
     messagebox.showinfo("Account created!", f"User '{username}' has been created.")
 
+def main():
+    window = Tk()
+    window.title("Windows offline-user creation")
 
-window = tkinter.Tk()
-window.title("Windows offline-user creation")
+    frame = Frame(window)
+    frame.pack()
 
-frame = tkinter.Frame(window)
-frame.pack()
+    # User Information
+    user_info_frame = LabelFrame(frame, text="Information")
+    user_info_frame.grid(row=0, column=0, padx=10, pady=10)
 
-# Benutzer Informationen speichern
-user_info_frame = tkinter.LabelFrame(frame, text="Information")
-user_info_frame.grid(row=0, column=0)
+    username_label = Label(user_info_frame, text="Username")
+    username_label.grid(row=0, column=0, padx=5, pady=5)
+    password_label = Label(user_info_frame, text="Password")
+    password_label.grid(row=1, column=0, padx=5, pady=5)
 
-username_label = tkinter.Label(user_info_frame, text="Username")
-username_label.grid(row=0, column=0)
-password_label = tkinter.Label(user_info_frame, text="Password")
-password_label.grid(row=1, column=0)
+    username_entry = Entry(user_info_frame)
+    username_entry.grid(row=0, column=1, padx=5, pady=5)
+    password_entry = Entry(user_info_frame, show="*")
+    password_entry.grid(row=1, column=1, padx=5, pady=5)
 
-username_entry = tkinter.Entry(user_info_frame)
-username_entry.grid(row=0, column=1)
-password_entry = tkinter.Entry(user_info_frame, show="*")
-password_entry.grid(row=1, column=1)
+    admin_var = IntVar()
+    admin_checkbox = Checkbutton(user_info_frame, text="Administrator", variable=admin_var)
+    admin_checkbox.grid(row=2, column=1, padx=5, pady=5)
 
-admin_var = tkinter.IntVar()
-admin_checkbox = tkinter.Checkbutton(user_info_frame, text="Administrator", variable=admin_var)
-admin_checkbox.grid(row=2, column=1)
+    create_button = Button(user_info_frame, text="Create", command=create_account)
+    create_button.grid(row=3, column=1, padx=5, pady=5)
 
-create_button = tkinter.Button(user_info_frame, text="Create", command=create_account)
-create_button.grid(row=3, column=1)
+    window.mainloop()
 
-window.mainloop()
+if __name__ == "__main__":
+    main()
