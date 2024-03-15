@@ -1,11 +1,10 @@
-from tkinter import Tk, Frame, Label, Entry, Checkbutton, Button, messagebox
+from tkinter import messagebox, IntVar, LabelFrame, Tk, Frame, Label, Entry, Checkbutton, Button
 import os
 
-def create_account():
+def create_account(username_entry, password_entry, admin_var):
     username = username_entry.get()
     password = password_entry.get()
 
-    # Create user account
     command_create_user = f"net user {username} {password} /add"
     os.system(command_create_user)
 
@@ -22,7 +21,6 @@ def main():
     frame = Frame(window)
     frame.pack()
 
-    # User Information
     user_info_frame = LabelFrame(frame, text="Information")
     user_info_frame.grid(row=0, column=0, padx=10, pady=10)
 
@@ -40,7 +38,7 @@ def main():
     admin_checkbox = Checkbutton(user_info_frame, text="Administrator", variable=admin_var)
     admin_checkbox.grid(row=2, column=1, padx=5, pady=5)
 
-    create_button = Button(user_info_frame, text="Create", command=create_account)
+    create_button = Button(user_info_frame, text="Create", command=lambda: create_account(username_entry, password_entry, admin_var))
     create_button.grid(row=3, column=1, padx=5, pady=5)
 
     window.mainloop()
