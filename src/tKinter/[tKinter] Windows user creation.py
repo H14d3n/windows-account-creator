@@ -1,6 +1,7 @@
 from tkinter import messagebox, IntVar, LabelFrame, Tk, Frame, Label, Entry, Checkbutton, Button
 import os
 
+# Function to collect user information from frames and check if administrator box is checked.
 def create_account(username_entry, password_entry, admin_var):
     username = username_entry.get()
     password = password_entry.get()
@@ -14,6 +15,7 @@ def create_account(username_entry, password_entry, admin_var):
 
     messagebox.showinfo("Account created!", f"User '{username}' has been created.")
 
+# Main GUI
 def main():
     window = Tk()
     window.title("Windows offline-user creation")
