@@ -33,19 +33,6 @@ submit.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
 
 root.mainloop()
 
-def create_user():
-    # Lesen Sie den Benutzernamen und das Passwort
-    user = username.get()
-    passwd = password.get()
-    
-    # Überprüfen, ob der Administrator ausgewählt ist
-    admin = " /add" if admin_check.get() else ""
 
-    command = f"net user {user} {passwd}{admin}"
-    result = subprocess.run(command, capture_output=True, text=True, shell=True)
-    
-    if result.returncode == 0:
-        print("Benutzer erfolgreich erstellt.")
-    else:
-        print("Fehler beim Erstellen des Benutzers:", result.stderr)
+  
 
