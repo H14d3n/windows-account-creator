@@ -12,6 +12,8 @@ root = customtkinter.CTk()
 
 root.title('Offline Account Creator')
 root.geometry('350x350')
+root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\Pictogrammers-Material-Account.512.ico')
+
 
 title = customtkinter.CTkLabel(root, text="Account Creator", font=('Calibri', 25))
 title.place(relx=0.275, rely=0.1)
