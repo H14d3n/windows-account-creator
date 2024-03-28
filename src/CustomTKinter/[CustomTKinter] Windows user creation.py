@@ -1,54 +1,49 @@
-import tkinter as tk
-from tkinter import ttk
+from tkinter import *
+import customtkinter
+import subprocess
+import os
 
-def on_button_click():
-    input_text = input_entry.get()
-    print("Eingegebener Text:", input_text)
+#Theme of Application
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
+customtkinter.deactivate_automatic_dpi_awareness()
 
-root = tk.Tk()
-root.title("Rundes Eingabefeld")
+root = customtkinter.CTk()
 
-# Hintergrundfarbe setzen
-root.configure(bg="#87CEEB")
+root.title('Offline Account Creator')
+root.geometry('350x350')
 
-# Funktion für das Rundmachen eines Widgets
-def round_rectangle(x1, y1, x2, y2, radius=25, **kwargs):
-    points = [x1+radius, y1,
-              x1+radius, y1,
-              x2-radius, y1,
-              x2-radius, y1,
-              x2, y1,
-              x2, y1+radius,
-              x2, y1+radius,
-              x2, y2-radius,
-              x2, y2-radius,
-              x2, y2,
-              x2-radius, y2,
-              x2-radius, y2,
-              x1+radius, y2,
-              x1+radius, y2,
-              x1, y2,
-              x1, y2-radius,
-              x1, y2-radius,
-              x1, y1+radius,
-              x1, y1+radius,
-              x1, y1]
-    return canvas.create_polygon(points, **kwargs, smooth=True)
+title = customtkinter.CTkLabel(root, text="Account Creator", font=('Calibri', 25))
+title.place(relx=0.275, rely=0.1)
 
-# Erstellen eines Canvas
-canvas = tk.Canvas(root, bg="#87CEEB", highlightthickness=0)
-canvas.pack(fill="both", expand=True)
+username = customtkinter.CTkEntry(root, corner_radius=10, width=140, height=40, fg_color="#ffffff", text_color="#000000", placeholder_text="Username")
+username.place(relx=0.3, rely=0.3)
 
-# Koordinaten für das runde Eingabefeld
-x1, y1, x2, y2 = 50, 50, 250, 100
+password = customtkinter.CTkEntry(root, corner_radius=10, width=140, height=40, fg_color="#ffffff", text_color="#000000", placeholder_text="Password")
+password.place(relx=0.3, rely=0.45)
 
-# Rundes Eingabefeld erstellen
-round_rectangle(x1, y1, x2, y2, radius=20, fill="white")
-input_entry = tk.Entry(root, bg="white", bd=0)
-input_entry.place(x=60, y=60, width=180, height=30)
+admin_check = customtkinter.CTkCheckBox(root, corner_radius=10, fg_color="#ffffff", checkmark_color="#000000", text="Administrator")
+admin_check.place(relx=0.35, rely=0.625)
 
-# Button erstellen
-button = ttk.Button(root, text="Klick mich!", command=on_button_click)
-button.place(x=120, y=150, width=100, height=30)
+submit = customtkinter.CTkButton(root, corner_radius=10, text="Submit", fg_color="#ffffff", hover_color="#A9A9A9", text_color="#000000")
+submit.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
+
 
 root.mainloop()
+
+def create_user():
+    # Lesen Sie den Benutzernamen und das Passwort
+    user = username.get()
+    passwd = password.get()
+    
+    # Überprüfen, ob der Administrator ausgewählt ist
+    admin = " /add" if admin_check.get() else ""
+
+    command = f"net user {user} {passwd}{admin}"
+    result = subprocess.run(command, capture_output=True, text=True, shell=True)
+    
+    if result.returncode == 0:
+        print("Benutzer erfolgreich erstellt.")
+    else:
+        print("Fehler beim Erstellen des Benutzers:", result.stderr)
+
