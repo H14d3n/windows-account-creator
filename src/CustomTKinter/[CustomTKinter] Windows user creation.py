@@ -8,6 +8,18 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 customtkinter.deactivate_automatic_dpi_awareness()
 
+def create_account():
+
+    end_username = username.get()
+    end_password = password.get()
+    is_checked =  admin_check.get()
+
+    COMMAND = f"net user {end_username} {end_password} /add"
+    if is_checked:
+        COMMAND += " /add"
+
+    subprocess.run(COMMAND, shell=True)    
+
 root = customtkinter.CTk()
 
 root.title('Offline Account Creator')
@@ -25,14 +37,20 @@ password = customtkinter.CTkEntry(root, corner_radius=10, width=140, height=40, 
 password.configure(show="*")
 password.place(relx=0.3, rely=0.45)
 
-admin_check = customtkinter.CTkCheckBox(root, corner_radius=10, fg_color="#ffffff", checkmark_color="#000000", text="Administrator")
+admin_check_var = BooleanVar()
+admin_check = customtkinter.CTkCheckBox(root, corner_radius=10, fg_color="#ffffff", checkmark_color="#000000", text="Administrator", variable=admin_check_var)
 admin_check.place(relx=0.35, rely=0.625)
 
-submit = customtkinter.CTkButton(root, corner_radius=10, text="Submit", fg_color="#ffffff", hover_color="#A9A9A9", text_color="#000000")
+def submit_pressed():
+    create_account()
+
+submit = customtkinter.CTkButton(root, corner_radius=10, text="Submit", fg_color="#ffffff", hover_color="#A9A9A9", text_color="#000000", command=submit_pressed)
 submit.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
 
 
 root.mainloop()
+
+
 
 
   
