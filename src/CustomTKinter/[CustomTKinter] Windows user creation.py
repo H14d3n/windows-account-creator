@@ -15,13 +15,14 @@ root.geometry('350x350')
 root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\Pictogrammers-Material-Account.512.ico')
 
 
-title = customtkinter.CTkLabel(root, text="Account Creator", font=('Calibri', 25))
-title.place(relx=0.275, rely=0.1)
+title = customtkinter.CTkLabel(root, text="Account Creator", font=('Bold Calibri', 25))
+title.place(relx=0.25, rely=0.1)
 
 username = customtkinter.CTkEntry(root, corner_radius=10, width=140, height=40, fg_color="#ffffff", text_color="#000000", placeholder_text="Username")
 username.place(relx=0.3, rely=0.3)
 
 password = customtkinter.CTkEntry(root, corner_radius=10, width=140, height=40, fg_color="#ffffff", text_color="#000000", placeholder_text="Password")
+password.configure(show="*")
 password.place(relx=0.3, rely=0.45)
 
 admin_check = customtkinter.CTkCheckBox(root, corner_radius=10, fg_color="#ffffff", checkmark_color="#000000", text="Administrator")
