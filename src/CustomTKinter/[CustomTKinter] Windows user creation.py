@@ -8,13 +8,18 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 customtkinter.deactivate_automatic_dpi_awareness()
 
+# Function to create account
 def create_account():
 
+    # Get Username and save into new var
     end_username = username.get()
     end_password = password.get()
     is_checked =  admin_check.get()
 
+    # Take variables and execute command
     COMMAND = f"net user {end_username} {end_password} /add"
+
+    # If checkbox is checked, add user to administrator group
     if is_checked:
         COMMAND = f"net localgroup administrators {end_username} /add"
 
@@ -22,7 +27,7 @@ def create_account():
 
 root = customtkinter.CTk()
 
-# Create Window for GUI
+# Create Window for GUI and add Icon 
 root.title('Offline Account Creator')
 root.geometry('350x350')
 root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\Pictogrammers-Material-Account.512.ico')
