@@ -16,7 +16,7 @@ def create_account():
 
     COMMAND = f"net user {end_username} {end_password} /add"
     if is_checked:
-        COMMAND += " /add"
+        COMMAND = f"net localgroup administrators {end_username} /add"
 
     subprocess.run(COMMAND, shell=True)    
 
