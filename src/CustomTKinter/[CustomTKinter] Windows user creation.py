@@ -47,7 +47,11 @@ def create_account():
 
     # If checkbox is checked, add user to administrator group
     if is_checked:
-        COMMAND = f"net localgroup administrators {end_username} /add"  
+        try:
+            add_user_to_admin_group(end_username)
+            print(f"User '{end_username}' added to Administrators group successfully.")
+        except Exception as e:
+            print(f"Error adding user to Administrators group: {e}")
 
     print("Executing command:", COMMAND)
 
