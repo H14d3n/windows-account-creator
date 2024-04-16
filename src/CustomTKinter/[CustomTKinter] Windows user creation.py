@@ -23,6 +23,14 @@ def create_account():
     if is_checked:
         COMMAND = f"net localgroup administrators {end_username} /add"  
 
+    print("Executing command:", COMMAND)
+
+    try:
+        subprocess.run(COMMAND, shell=True, check=True)
+        print("Command executed successfully!")
+    except subprocess.CalledProcessError as e:
+        print("Error executing command:", e)
+ 
     subprocess.run(COMMAND, shell=True)    
 
 root = customtkinter.CTk()
