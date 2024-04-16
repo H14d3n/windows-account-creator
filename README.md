@@ -1,7 +1,7 @@
 # tKinter-Experiment
 Brief simplification of the user creation process in Windows, implemented in python.
 
-### Version with CustomTKinter
+### `Version with CustomTKinter`
 ![image](https://github.com/H14d3n/tKinter-experiment/assets/146072924/fbaa6dbb-0237-43e9-ad36-71cf0633fcc2)
 
 ### `Version with TKinter`
