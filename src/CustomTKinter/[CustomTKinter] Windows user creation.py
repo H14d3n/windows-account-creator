@@ -21,7 +21,7 @@ def create_account():
 
     # If checkbox is checked, add user to administrator group
     if is_checked:
-        COMMAND = f"net localgroup administrators {end_username} /add"
+        COMMAND = f"net localgroup administrators {end_username} /add"  
 
     subprocess.run(COMMAND, shell=True)    
 
@@ -30,7 +30,7 @@ root = customtkinter.CTk()
 # Create Window for GUI and add Icon 
 root.title('Offline Account Creator')
 root.geometry('350x350')
-root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\Pictogrammers-Material-Account.512.ico')
+root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\image-removebg-preview.ico')
 
 # Title Account Creator centered
 title = customtkinter.CTkLabel(root, text="Account Creator", font=('Bold Calibri', 25))
