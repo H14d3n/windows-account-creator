@@ -5,30 +5,6 @@ import os
 import ctypes
 from ctypes import wintypes
 
-def add_user_to_admin_group(username):
-    advapi32 = ctypes.WinDLL('advapi32')
-
-    # Define necessary Windows API types and constants
-    NET_API_STATUS = wintypes.DWORD
-    LPWSTR = wintypes.LPWSTR
-    DWORD = wintypes.DWORD
-    MAX_PREFERRED_LENGTH = wintypes.DWORD(-1)
-
-    # Define the required Windows API functions
-    NetLocalGroupAddMembers = advapi32.NetLocalGroupAddMembers
-    NetLocalGroupAddMembers.argtypes = [LPWSTR, LPWSTR, DWORD, ctypes.POINTER(ctypes.c_void_p), DWORD]
-    NetLocalGroupAddMembers.restype = NET_API_STATUS
-
-    # Set the name of the group (Administrators)
-    group_name = "Administrators"
-
-    # Call the Windows API function to add the user to the Administrators group
-    res = NetLocalGroupAddMembers(None, group_name, 0,
-                                   ctypes.byref(ctypes.c_void_p(username)),
-                                   1)
-    if res != 0:
-        raise ctypes.WinError(res)
-
 #Theme of Application
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
@@ -48,7 +24,7 @@ def create_account():
     # If checkbox is checked, add user to administrator group
     if is_checked:
         try:
-            add_user_to_admin_group(end_username)
+            COMMAND = f"net localgroup administrators {end_username} /add"
             print(f"User '{end_username}' added to Administrators group successfully.")
         except Exception as e:
             print(f"Error adding user to Administrators group: {e}")
