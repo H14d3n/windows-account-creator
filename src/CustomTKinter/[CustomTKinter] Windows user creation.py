@@ -2,8 +2,6 @@ from tkinter import *
 import customtkinter
 import subprocess
 import os
-import ctypes
-from ctypes import wintypes
 
 #Theme of Application
 customtkinter.set_appearance_mode("dark")
