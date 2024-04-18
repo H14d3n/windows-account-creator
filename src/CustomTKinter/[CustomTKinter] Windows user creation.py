@@ -10,32 +10,34 @@ customtkinter.deactivate_automatic_dpi_awareness()
 
 # Function to create account
 def create_account():
-
     # Get Username and save into new var
     end_username = username.get()
     end_password = password.get()
-    is_checked =  admin_check.get()
+    is_checked =  admin_check_var.get()
 
     # Take variables and execute command
-    COMMAND = f"net user {end_username} {end_password} /add"
+    user_command = f"net user {end_username} {end_password} /add"
+
+    print("Executing command:", user_command)
+
+    try:
+        subprocess.run(user_command, shell=True, check=True)
+        print("User created successfully!")
+    except subprocess.CalledProcessError as e:
+        print("Error creating user:", e)
+        return
 
     # If checkbox is checked, add user to administrator group
     if is_checked:
+        admin_command = f"net localgroup Administrators {end_username} /add"
+        print("Executing command:", admin_command)
+
         try:
-            COMMAND = f"net localgroup administrators {end_username} /add"
+            subprocess.run(admin_command, shell=True, check=True)
             print(f"User '{end_username}' added to Administrators group successfully.")
-        except Exception as e:
+        except subprocess.CalledProcessError as e:
             print(f"Error adding user to Administrators group: {e}")
-
-    print("Executing command:", COMMAND)
-
-    try:
-        subprocess.run(COMMAND, shell=True, check=True)
-        print("Command executed successfully!")
-    except subprocess.CalledProcessError as e:
-        print("Error executing command:", e)
- 
-    subprocess.run(COMMAND, shell=True)    
+            return
 
 root = customtkinter.CTk()
 
