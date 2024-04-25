@@ -74,9 +74,3 @@ submit.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
 
 
 root.mainloop()
-
-
-
-
-  
-
