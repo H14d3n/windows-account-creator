@@ -44,6 +44,7 @@ root = customtkinter.CTk()
 # Create Window for GUI and add Icon 
 root.title('Offline Account Creator')
 root.geometry('350x350')
+root.resizable(False, False)
 root.iconbitmap(r'C:\Users\2380\OneDrive - FernUni Schweiz\Dokumente\GitHub\tKinter-experiment\src\CustomTKinter\image-removebg-preview.ico')
 
 # Title Account Creator centered
