@@ -29,15 +29,31 @@ def create_account():
 
     # If checkbox is checked, add user to administrator group
     if is_checked:
-        admin_command = f"net localgroup Administrators {end_username} /add"
-        print("Executing command:", admin_command)
 
-        try:
-            subprocess.run(admin_command, shell=True, check=True)
-            print(f"User '{end_username}' added to Administrators group successfully.")
-        except subprocess.CalledProcessError as e:
-            print(f"Error adding user to Administrators group: {e}")
-            return
+        admin_group_name = determine_admin_group()
+        
+        if admin_group_name:
+            admin_command = f"net localgroup {admin_group_name} {end_username} /add"
+            print("Executing command:", admin_command)
+
+            try:
+                subprocess.run(admin_command, shell=True, check=True)
+                print(f"User '{end_username}' added to {admin_group_name} group successfully.")
+            except subprocess.CalledProcessError as e:
+                print(f"Error adding user to {admin_group_name} group: {e}")
+                return
+        else:
+            print("No suitable admin group found.")
+        
+
+def determine_admin_group():
+    admin_groups = ["Administrateurs", "Administratoren", "Administrators"]
+    for group in admin_groups:
+        result = subprocess.run (f"net localgroup {group}", shell=True, capture_output=True, text=True) 
+        if "alias does not exist" not in result.stderr:
+            return group
+    return None       
+    
 
 root = customtkinter.CTk()
 
