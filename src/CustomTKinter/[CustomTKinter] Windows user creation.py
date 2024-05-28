@@ -45,7 +45,7 @@ def create_account():
         else:
             print("No suitable admin group found.")
         
-
+# This functions checks / iterates through every object in array, then returns existing groupname
 def determine_admin_group():
     admin_groups = ["Administrateurs", "Administratoren", "Administrators"]
     for group in admin_groups:
