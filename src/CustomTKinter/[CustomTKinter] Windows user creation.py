@@ -3,7 +3,7 @@ import customtkinter
 import subprocess
 import os
 
-#Theme of Application
+# Theme of Application
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 customtkinter.deactivate_automatic_dpi_awareness()
@@ -13,7 +13,7 @@ def create_account():
     # Get Username and save into new var
     end_username = username.get()
     end_password = password.get()
-    is_checked =  admin_check_var.get()
+    is_checked = admin_check_var.get()
 
     # Take variables and execute command
     user_command = f"net user {end_username} {end_password} /add"
@@ -29,11 +29,10 @@ def create_account():
 
     # If checkbox is checked, add user to administrator group
     if is_checked:
-
         admin_group_name = determine_admin_group()
         
         if admin_group_name:
-            admin_command = f"net localgroup {admin_group_name} {end_username} /add"
+            admin_command = f"net localgroup \"{admin_group_name}\" {end_username} /add"
             print("Executing command:", admin_command)
 
             try:
@@ -49,11 +48,10 @@ def create_account():
 def determine_admin_group():
     admin_groups = ["Administrateurs", "Administratoren", "Administrators"]
     for group in admin_groups:
-        result = subprocess.run (f"net localgroup {group}", shell=True, capture_output=True, text=True) 
-        if "alias does not exist" not in result.stderr:
+        result = subprocess.run(f"net localgroup \"{group}\"", shell=True, capture_output=True, text=True)
+        if result.returncode == 0:
             return group
-    return None       
-    
+    return None
 
 root = customtkinter.CTk()
 
@@ -87,6 +85,5 @@ def submit_pressed():
 # Submit button, linked with submit_pressed function
 submit = customtkinter.CTkButton(root, corner_radius=10, text="Submit", fg_color="#ffffff", hover_color="#A9A9A9", text_color="#000000", command=submit_pressed)
 submit.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
-
 
 root.mainloop()
