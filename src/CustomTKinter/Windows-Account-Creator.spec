@@ -36,3 +36,5 @@ exe = EXE(
     entitlements_file=None,
     icon=['C:\\Users\\2380\\OneDrive - FernUni Schweiz\\Dokumente\\GitHub\\tKinter-experiment\\src\\CustomTKinter\\Pictogrammers-Material-Account.512.ico'],
 )
+
+
