@@ -86,7 +86,6 @@ root = customtkinter.CTk()
 root.title('Offline Account Creator')
 root.geometry('350x350')
 root.resizable(False, False)
-root.iconbitmap(".\src\CustomTKinter\image-removebg-preview.ico")
 
 # Title label
 title = customtkinter.CTkLabel(root, text="Account Creator", font=('Bold Calibri', 25))
